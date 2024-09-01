@@ -1,43 +1,32 @@
-const models = require('../models')
-const Game = models.Game
-const { Op } = require("sequelize");
-class Repository {
-
-    async findAll(){
-        return Game.findAll({
-            order: [
-                ['createdAt', 'ASC'],
-            ],
-        })
+const models = require('../models');
+const Book = models.Book
+exports.create = async function ({ name }) {
+    try {
+        const newBook = await Book.create({ name });
+        return newBook
+    } catch (err) {
+        console.log("Error on repository create book : ",err)
+        throw err
     }
-
-    async findOneById(id){
-        return Game.findOne({
-            where:{id:id}
-        })
-    }
-
-    async searchGames(object){
-        return Game.findAll({
-            where:{
-                [Op.or]:[
-                    {
-                        name:{
-                            [Op.like]: `%${object.name}%`
-                        }
-                    },
-                    {
-                        title:{
-                            [Op.like]: `%${object.name}%`
-                        }
-                    },
-                ]
-
-            }
-        })
-    }
-    
-
 }
 
-module.exports = new Repository()
+exports.getAll = async function () {
+    try {
+        const allBooks = await Book.findAll();
+        return allBooks
+    } catch (err) {
+        console.log("Error on repository getAll book : ",err)
+        throw err
+    }
+}
+
+exports.getOne = async function (id) {
+    try {
+        const book = await Book.findOne({ where: { id } });
+        if (!book) throw "Book Not Found"
+        return book
+    } catch (err) {
+        console.log("Error on repository getOne Book: ",err)
+        throw err
+    }
+}
