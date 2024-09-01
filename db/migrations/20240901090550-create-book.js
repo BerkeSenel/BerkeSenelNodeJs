@@ -5,8 +5,8 @@ module.exports = {
   async up (queryInterface, Sequelize) {
     return queryInterface.createTable('Books', {
       id:{
-        type: Sequelize.DataTypes.UUID,
-        allowNull: false,
+        type: Sequelize.DataTypes.INTEGER,
+        autoIncrement: true,
         primaryKey: true,
       },
       name:{
@@ -17,11 +17,23 @@ module.exports = {
         type: Sequelize.DataTypes.FLOAT,
         allowNull:false,
         defaultValue:0,
-      }
+      },
+      createdAt: {
+        type: Sequelize.DataTypes.DATE,
+        allowNull:false
+      },
+      updatedAt: {
+        type: Sequelize.DataTypes.DATE,
+        allowNull:false
+      },
+      deletedAt: {
+        type: Sequelize.DataTypes.DATE,
+        allowNull:true
+      },
     });
   },
 
   async down (queryInterface, Sequelize) {
-    return queryInterface.dropTable('Book');
+    return queryInterface.dropTable('Books');
   }
 };

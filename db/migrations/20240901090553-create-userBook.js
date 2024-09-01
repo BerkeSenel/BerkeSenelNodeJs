@@ -5,12 +5,12 @@ module.exports = {
   async up (queryInterface, Sequelize) {
     return queryInterface.createTable('UserBooks', {
       id:{
-        type: Sequelize.DataTypes.UUID,
-        allowNull: false,
+        type: Sequelize.DataTypes.INTEGER,
+        autoIncrement: true,
         primaryKey: true,
       },
       userId:{
-        type: Sequelize.DataTypes.UUID,
+        type: Sequelize.DataTypes.INTEGER,
         allowNull:false,
         references: {
           model: {
@@ -20,7 +20,7 @@ module.exports = {
         },
       },
       bookId: {
-        type: Sequelize.DataTypes.UUID,
+        type: Sequelize.DataTypes.INTEGER,
         references: {
           model: {
             tableName: 'books',
@@ -32,16 +32,23 @@ module.exports = {
       rating: {
         type: Sequelize.DataTypes.STRING,
         allowNull:false
-      }
+      },
+      createdAt: {
+        type: Sequelize.DataTypes.DATE,
+        allowNull:false
+      },
+      updatedAt: {
+        type: Sequelize.DataTypes.DATE,
+        allowNull:false
+      },
+      deletedAt: {
+        type: Sequelize.DataTypes.DATE,
+        allowNull:true
+      },
     });
   },
 
   async down (queryInterface, Sequelize) {
-    /**
-     * Add reverting commands here.
-     *
-     * Example:
-     * await queryInterface.dropTable('users');
-     */
+    return queryInterface.dropTable('UserBooks');
   }
 };
