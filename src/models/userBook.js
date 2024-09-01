@@ -16,8 +16,8 @@ module.exports = (sequelize, DataTypes) => {
   }
   UserBook.init({
     id:{
-      type:DataTypes.UUID,
-      allowNull: false,
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
       primaryKey: true,
     },
     rating:{

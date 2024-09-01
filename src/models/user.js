@@ -15,8 +15,8 @@ module.exports = (sequelize, DataTypes) => {
   }
   User.init({
     id:{
-      type:DataTypes.UUID,
-      allowNull: false,
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
       primaryKey: true,
     },
     name:{
@@ -27,6 +27,18 @@ module.exports = (sequelize, DataTypes) => {
     sequelize,
     modelName: 'User',
     paranoid: true,
+    defaultScope: {
+      attributes: {
+        exclude: ['createdAt','updatedAt','deletedAt']
+      },
+      order: [['name', 'DESC']]
+    },
+    hooks: {
+      afterCreate (user,options) {
+        delete user.dataValues.createdAt
+        delete user.dataValues.updatedAt
+      }
+    }
   });
   return User;
 };

@@ -15,8 +15,8 @@ module.exports = (sequelize, DataTypes) => {
   }
   Book.init({
     id:{
-      type:DataTypes.UUID,
-      allowNull: false,
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
       primaryKey: true,
     },
     name:{
