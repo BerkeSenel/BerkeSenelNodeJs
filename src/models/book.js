@@ -32,6 +32,19 @@ module.exports = (sequelize, DataTypes) => {
     sequelize,
     modelName: 'Book',
     paranoid: true,
+    defaultScope: {
+      attributes: {
+        exclude: ['createdAt','updatedAt','deletedAt']
+      },
+      order: [['name', 'DESC']]
+    },
+    hooks: {
+      afterCreate (user,options) {
+        delete user.dataValues.createdAt
+        delete user.dataValues.updatedAt
+        delete user.dataValues.avgRating
+      }
+    }
   });
   return Book;
 };
