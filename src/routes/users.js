@@ -7,9 +7,9 @@ router.route("")
 
 router.get("/:id", controller.getOne);
 
-router.post("/:id/borrow/:bookId", controller.borrowBook);
+router.post("/:userId/borrow/:bookId", controller.borrowBook);
 
-router.post("/:id/return/:bookId", controller.returnBook);
+router.post("/:userId/return/:bookId", controller.returnBook);
 
 
 module.exports = router;
