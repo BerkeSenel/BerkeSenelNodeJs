@@ -30,8 +30,8 @@ module.exports = {
         allowNull:false,
       },
       rating: {
-        type: Sequelize.DataTypes.STRING,
-        allowNull:false
+        type: Sequelize.DataTypes.INTEGER,
+        allowNull:true
       },
       createdAt: {
         type: Sequelize.DataTypes.DATE,
