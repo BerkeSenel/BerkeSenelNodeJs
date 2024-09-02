@@ -1,11 +1,12 @@
 const router = require('express').Router({ mergeParams: true });
 const controller = require('../controllers/books')
+const validators = require('../middlewares/book');
 
 router.route("")
     .get(controller.getAll)
-    .post(controller.create)
+    .post(validators.create, controller.create)
 
-router.get("/:id",controller.getOne);
+router.get("/:id", validators.getOne, controller.getOne);
 
 
 
