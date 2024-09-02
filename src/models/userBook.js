@@ -10,8 +10,8 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      models.User.belongsToMany(models.Book, { through: UserBook });
-      models.Book.belongsToMany(models.User, { through: UserBook });
+      UserBook.belongsTo(models.User, { foreignKey: 'UserId' });
+      UserBook.belongsTo(models.Book, { foreignKey: 'BookId' });
     }
   }
   UserBook.init({
@@ -21,8 +21,8 @@ module.exports = (sequelize, DataTypes) => {
       primaryKey: true,
     },
     rating:{
-      type:DataTypes.STRING,
-      allowNull:false
+      type:DataTypes.INTEGER,
+      allowNull:true,
     }
   }, {
     sequelize,
