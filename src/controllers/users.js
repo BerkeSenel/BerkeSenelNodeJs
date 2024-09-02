@@ -33,8 +33,9 @@ exports.create = async function (req, res) {
 
 exports.borrowBook = async function (req, res) {
   try {
-    const data = await service.borrowBook();
-    return res.status(200).send(data);
+    const { userId, bookId } = req.params
+    await service.borrowBook(userId, bookId);
+    return res.status(200).send("Successfull");
   } catch (err) {
     return res.status(400).json({ error: err.toString() })
   }
@@ -43,8 +44,10 @@ exports.borrowBook = async function (req, res) {
 
 exports.returnBook = async function (req, res) {
   try {
-    const data = await service.returnBook();
-    return res.status(200).send(data);
+    const { score } = req.body
+    const { userId, bookId } = req.params
+    await service.returnBook(userId, bookId, score);
+    return res.status(200).send("Successfull");
   } catch (err) {
     return res.status(400).json({ error: err.toString() })
   }
